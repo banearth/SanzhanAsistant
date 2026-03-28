@@ -15,6 +15,20 @@ class DailyTaskDefinition:
 
 
 TASK_REGISTRY: dict[str, DailyTaskDefinition] = {
+    "inspect_alliance_tasks": DailyTaskDefinition(
+        name="inspect_alliance_tasks",
+        label="Inspect Alliance Tasks",
+        risk_level=RiskLevel.LOW,
+        preferred_page=PageState.ALLIANCE_TASK_CENTER,
+        detail="Inspect the alliance task board and identify the current combat or dispatch objective.",
+    ),
+    "alliance_dispatch_loop": DailyTaskDefinition(
+        name="alliance_dispatch_loop",
+        label="Alliance Dispatch Loop",
+        risk_level=RiskLevel.MEDIUM,
+        preferred_page=PageState.ALLIANCE_TASK_CENTER,
+        detail="Core SanZhan daily loop: keep visiting alliance tasks and dispatching troops to the active objective.",
+    ),
     "collect_mail": DailyTaskDefinition(
         name="collect_mail",
         label="Collect Mail",
@@ -27,7 +41,7 @@ TASK_REGISTRY: dict[str, DailyTaskDefinition] = {
         label="Collect Tasks",
         risk_level=RiskLevel.LOW,
         preferred_page=PageState.TASK_CENTER,
-        detail="Claim completed daily or growth task rewards.",
+        detail="Handle generic task rewards, but treat alliance-task objectives as the meaningful battle-facing loop.",
     ),
     "collect_general_rewards": DailyTaskDefinition(
         name="collect_general_rewards",

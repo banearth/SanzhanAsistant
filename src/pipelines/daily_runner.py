@@ -23,6 +23,7 @@ class DailyRunner:
         notes = [
             "This is a scaffold run. MaaFramework controller integration is not wired yet.",
             "Use this report shape as the baseline for future real task execution.",
+            "For SanZhan, alliance tasks are modeled as the meaningful battle-facing daily loop rather than ordinary reward claims.",
         ]
         notes.extend(snapshot.notes)
 
