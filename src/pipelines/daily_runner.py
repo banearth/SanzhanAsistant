@@ -4,6 +4,7 @@ from datetime import datetime
 from pathlib import Path
 
 from src.core.runtime import RuntimeContext
+from src.planner.team_policy import load_team_policy_config
 from src.pipelines.task_registry import TASK_REGISTRY
 from src.recognizers.page_state import KeywordPageStateRecognizer
 from src.safety.guard import SafetyGuard
@@ -25,6 +26,7 @@ class DailyRunner:
             "Use this report shape as the baseline for future real task execution.",
             "For SanZhan, alliance tasks are modeled as the meaningful battle-facing daily loop rather than ordinary reward claims.",
         ]
+        notes.extend(self._team_policy_notes())
         notes.extend(snapshot.notes)
 
         configured_tasks = self._ctx.config.tasks.get("tasks", {})
@@ -166,3 +168,12 @@ class DailyRunner:
         return sorted(
             path for path in fixture_dir.rglob("*") if path.is_file() and path.suffix.lower() in allowed_suffixes
         )
+
+    def _team_policy_notes(self) -> list[str]:
+        team_config = load_team_policy_config(self._ctx.config)
+        notes = [f"Team policy default: {team_config.describe_runtime_default()}"]
+        if team_config.notes:
+            notes.append(f"Team policy notes: {team_config.notes}")
+        for policy in team_config.teams:
+            notes.append(policy.describe())
+        return notes

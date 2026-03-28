@@ -36,6 +36,7 @@
 - 三战是强社交协作玩法
 - `同盟` 页签下的任务/目标，才是更有意义的核心日常
 - 真正重要的循环通常是“查看同盟目标 -> 派兵 -> 战斗 -> 回看结果 -> 再次派兵”
+- 派兵时不能只看“是否出兵”，还要遵守每支队伍的兵力策略
 
 目前已经通过真实样本确认的一条链路是：
 
@@ -44,6 +45,27 @@
 - 跳转到地图上的目标点
 - 自动展开动作菜单
 - 菜单中出现 `行军`、`驻守` 等派兵相关操作
+
+## 队伍策略配置
+
+项目现在提供了单独的队伍策略配置文件：
+
+- `config/teams.toml`
+
+后续如果你想调整哪支队伍满兵、哪支队伍碰瓷，优先直接改这个文件即可。
+
+当前已按你的说明写入默认值：
+
+- `1` 号 `张飞队`：主力队，默认满兵
+- `2` 号 `许攸队`：主力队，默认满兵
+- `3` 号 `公孙瓒队`：碰瓷队，默认 `4000/5000/5000`
+- `4` 号 `诸葛亮队`：主力队，默认满兵
+
+可以用下面的命令检查当前加载到的策略：
+
+```powershell
+python -m src.app.main print-team-policies
+```
 
 因此，项目后续的核心自动化方向会优先围绕 `ALLIANCE_TASK_CENTER` 和派兵作战循环来设计，而不是只做普通领奖脚本。
 
@@ -71,6 +93,7 @@ python -m src.app.main probe-device
 python -m src.app.main run-daily
 python -m src.app.main debug-capture
 python -m src.app.main inspect-fixtures
+python -m src.app.main print-team-policies
 python -m src.app.main capture-screen --name home_city --fixture
 python -m src.app.main capture-screen --name battle-report --fixture
 ```
@@ -88,6 +111,7 @@ python -m src.app.main capture-screen --name battle-report --fixture
 - `config/default.toml`
 - `config/tasks.toml`
 - `config/safety.toml`
+- `config/teams.toml`
 
 ## 说明
 

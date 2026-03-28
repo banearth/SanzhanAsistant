@@ -5,6 +5,7 @@ from pathlib import Path
 
 from src.agent.device import DeviceAdapter
 from src.core.config import load_app_config
+from src.planner.team_policy import load_team_policy_config
 from src.core.runtime import RuntimeContext
 from src.pipelines.daily_runner import DailyRunner
 from src.report.reporter import ReportWriter
@@ -19,6 +20,7 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.add_parser("run-daily", help="Run the scaffold daily flow and write a report.")
     subparsers.add_parser("debug-capture", help="Create a placeholder debug report for capture work.")
     subparsers.add_parser("inspect-fixtures", help="Inspect screenshot fixture filenames and guess page states.")
+    subparsers.add_parser("print-team-policies", help="Print configured troop allocation strategies for each team.")
     capture_parser = subparsers.add_parser("capture-screen", help="Capture a screenshot from the configured ADB device.")
     capture_parser.add_argument("--name", default="live-screen", help="Base filename for the screenshot output.")
     capture_parser.add_argument(
@@ -47,6 +49,7 @@ def run_check_env(ctx: RuntimeContext) -> int:
         ctx.root_dir / "config" / "default.toml",
         ctx.root_dir / "config" / "tasks.toml",
         ctx.root_dir / "config" / "safety.toml",
+        ctx.root_dir / "config" / "teams.toml",
         ctx.root_dir / "resource" / "pipeline",
         ctx.root_dir / "src",
     ]
@@ -65,6 +68,7 @@ def run_check_env(ctx: RuntimeContext) -> int:
     print(f"Daily reports: {ctx.config.runtime['report_dir']}")
     print(f"Screenshots: {ctx.config.runtime['screenshot_dir']}")
     print(f"Fixture dir: {ctx.fixture_dir}")
+    print(f"Team policy file: {ctx.root_dir / 'config' / 'teams.toml'}")
     print(f"Note: {device_health.note}")
     return 0
 
@@ -112,11 +116,27 @@ def run_capture_screen(ctx: RuntimeContext, name: str, fixture: bool) -> int:
     return 0
 
 
+def run_print_team_policies(ctx: RuntimeContext) -> int:
+    team_config = load_team_policy_config(ctx.config)
+    print("Configured team troop policies:")
+    print(f"Default behavior without explicit strategy: {team_config.describe_runtime_default()}")
+    if team_config.notes:
+        print(f"Policy notes: {team_config.notes}")
+    for policy in team_config.teams:
+        print(f"- {policy.describe()}")
+        if policy.notes:
+            print(f"  note: {policy.notes}")
+        if policy.desired_total is not None:
+            print(f"  desired_total: {policy.desired_total}")
+    return 0
+
+
 def run_print_config(ctx: RuntimeContext) -> int:
     print(f"Root: {ctx.root_dir}")
     print(f"Default config: {ctx.root_dir / 'config' / 'default.toml'}")
     print(f"Task config: {ctx.root_dir / 'config' / 'tasks.toml'}")
     print(f"Safety config: {ctx.root_dir / 'config' / 'safety.toml'}")
+    print(f"Team config: {ctx.root_dir / 'config' / 'teams.toml'}")
     return 0
 
 
@@ -135,6 +155,8 @@ def main() -> int:
         return run_debug_capture(ctx)
     if args.command == "inspect-fixtures":
         return run_inspect_fixtures(ctx)
+    if args.command == "print-team-policies":
+        return run_print_team_policies(ctx)
     if args.command == "capture-screen":
         return run_capture_screen(ctx, args.name, args.fixture)
     if args.command == "print-config":

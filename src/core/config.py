@@ -11,6 +11,7 @@ class AppConfig:
     default: dict[str, Any]
     tasks: dict[str, Any]
     safety: dict[str, Any]
+    teams: dict[str, Any]
     config_dir: Path
 
     @property
@@ -29,6 +30,10 @@ class AppConfig:
     def planner(self) -> dict[str, Any]:
         return self.default.get("planner", {})
 
+    @property
+    def team_policy(self) -> dict[str, Any]:
+        return self.teams
+
 
 def _load_toml(path: Path) -> dict[str, Any]:
     with path.open("rb") as file:
@@ -43,5 +48,6 @@ def load_app_config(config_dir: Path) -> AppConfig:
         default=_load_toml(config_dir / "default.toml"),
         tasks=_load_toml(config_dir / "tasks.toml"),
         safety=_load_toml(config_dir / "safety.toml"),
+        teams=_load_toml(config_dir / "teams.toml"),
         config_dir=config_dir,
     )

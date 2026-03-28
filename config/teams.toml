@@ -1,0 +1,44 @@
+[policy]
+default_skip_if_strategy_missing = true
+notes = "Configure how each roster should dispatch when alliance tasks lead into march or garrison flows."
+
+# deployment_policy:
+# - "full": 主力队，默认满兵出门
+# - "fixed_split": 按 fixed_troops 精确分配兵力
+# exact_required:
+# - true: 兵力不满足时直接跳过，不降级派兵
+
+[[teams]]
+slot = 1
+name = "张飞队"
+role = "main_force"
+enabled = true
+deployment_policy = "full"
+notes = "主力队，默认满兵出门。"
+
+[[teams]]
+slot = 2
+name = "许攸队"
+role = "main_force"
+enabled = true
+deployment_policy = "full"
+notes = "主力队，默认满兵出门。"
+
+[[teams]]
+slot = 3
+name = "公孙瓒队"
+role = "harass"
+enabled = true
+deployment_policy = "fixed_split"
+fixed_troops = [4000, 5000, 5000]
+exact_required = true
+skip_if_insufficient = true
+notes = "碰瓷队。默认 4000/5000/5000 出门，不满足精确兵力时不要派。"
+
+[[teams]]
+slot = 4
+name = "诸葛亮队"
+role = "main_force"
+enabled = true
+deployment_policy = "full"
+notes = "主力队，默认满兵出门。"
