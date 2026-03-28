@@ -1,0 +1,14 @@
+[workflow]
+ordering = [
+  "collect_mail",
+  "collect_tasks",
+  "collect_general_rewards",
+  "recruit_safe_mode",
+]
+
+[tasks]
+collect_mail = true
+collect_tasks = true
+collect_general_rewards = true
+recruit_safe_mode = true
+battle_scout_only = false

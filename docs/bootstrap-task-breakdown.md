@@ -33,9 +33,9 @@ SanzhanAssistant/
 │   ├── mvp-feature-checklist.md
 │   └── bootstrap-task-breakdown.md
 ├── config/
-│   ├── default.yaml
-│   ├── tasks.yaml
-│   └── safety.yaml
+│   ├── default.toml
+│   ├── tasks.toml
+│   └── safety.toml
 ├── resource/
 │   ├── image/
 │   │   ├── anchors/
@@ -84,11 +84,11 @@ SanzhanAssistant/
 
 ### 3.2 `config/`
 
-- `default.yaml`
+- `default.toml`
   - 模拟器连接、分辨率、日志路径、运行开关
-- `tasks.yaml`
+- `tasks.toml`
   - 开启哪些日常任务
-- `safety.yaml`
+- `safety.toml`
   - 风险等级、失败阈值、自动停止策略
 
 ### 3.3 `resource/`

@@ -1,0 +1,12 @@
+[safety]
+allow_only_low_risk_actions = true
+stop_on_unknown_popup = true
+stop_after_consecutive_failures = 3
+max_runtime_minutes = 30
+
+[risk_levels]
+collect_mail = "low"
+collect_tasks = "low"
+collect_general_rewards = "low"
+recruit_safe_mode = "low"
+battle_scout_only = "medium"

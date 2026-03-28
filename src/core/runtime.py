@@ -12,6 +12,10 @@ class RuntimeContext:
     config: AppConfig
 
     @property
+    def fixture_dir(self) -> Path:
+        return self.root_dir / "tests" / "fixtures"
+
+    @property
     def report_dir(self) -> Path:
         relative = self.config.runtime.get("report_dir", "reports/daily")
         path = self.root_dir / relative

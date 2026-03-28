@@ -30,6 +30,18 @@ class ReportWriter:
             for outcome in summary.outcomes:
                 lines.append(f"- {outcome.name}: {outcome.status.value} - {outcome.detail}")
 
+        lines.extend(["", "## Snapshot", ""])
+        if summary.snapshot is None:
+            lines.append("- No runtime snapshot.")
+        else:
+            lines.append(f"- Detected page: {summary.snapshot.detected_page.value}")
+            lines.append(f"- Fixture scan count: {summary.snapshot.fixture_scan_count}")
+            if summary.snapshot.last_fixture is not None:
+                lines.append(f"- Last fixture: {summary.snapshot.last_fixture}")
+            if summary.snapshot.notes:
+                for note in summary.snapshot.notes:
+                    lines.append(f"- Snapshot note: {note}")
+
         lines.extend(["", "## Notes", ""])
         if not summary.notes:
             lines.append("- No notes.")

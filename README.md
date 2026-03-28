@@ -48,6 +48,7 @@
 python -m src.app.main check-env
 python -m src.app.main run-daily
 python -m src.app.main debug-capture
+python -m src.app.main inspect-fixtures
 ```
 
 说明：
@@ -60,9 +61,9 @@ python -m src.app.main debug-capture
 
 配置文件位于：
 
-- `config/default.yaml`
-- `config/tasks.yaml`
-- `config/safety.yaml`
+- `config/default.toml`
+- `config/tasks.toml`
+- `config/safety.toml`
 
 ## 说明
 

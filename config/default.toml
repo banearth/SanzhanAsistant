@@ -1,0 +1,20 @@
+[device]
+type = "adb"
+serial = "emulator-5554"
+
+[game]
+package_name = "your.game.package"
+channel = "official"
+language = "zh-CN"
+
+[runtime]
+profile = "single-account"
+timezone = "Asia/Shanghai"
+report_dir = "reports/daily"
+screenshot_dir = "reports/screenshots"
+save_screenshots_on_fail = true
+max_retry_per_task = 2
+
+[planner]
+enabled = false
+mode = "explain-only"
