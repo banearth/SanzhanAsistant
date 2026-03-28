@@ -29,6 +29,20 @@ TASK_REGISTRY: dict[str, DailyTaskDefinition] = {
         preferred_page=PageState.ALLIANCE_TASK_CENTER,
         detail="Core SanZhan daily loop: keep visiting alliance tasks and dispatching troops to the active objective.",
     ),
+    "open_alliance_target_menu": DailyTaskDefinition(
+        name="open_alliance_target_menu",
+        label="Open Alliance Target Menu",
+        risk_level=RiskLevel.LOW,
+        preferred_page=PageState.ALLIANCE_TARGET_MENU,
+        detail="Reach the world-map target selected from an alliance task and open the action menu with options like march or garrison.",
+    ),
+    "garrison_alliance_target": DailyTaskDefinition(
+        name="garrison_alliance_target",
+        label="Garrison Alliance Target",
+        risk_level=RiskLevel.MEDIUM,
+        preferred_page=PageState.ALLIANCE_TARGET_MENU,
+        detail="Use the opened alliance target menu to select low-risk garrison actions for the designated city gate or objective.",
+    ),
     "collect_mail": DailyTaskDefinition(
         name="collect_mail",
         label="Collect Mail",

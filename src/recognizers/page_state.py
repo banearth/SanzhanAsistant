@@ -7,6 +7,7 @@ from src.state.models import PageState, RecognitionResult
 
 KEYWORD_TO_STATE: list[tuple[tuple[str, ...], PageState, str]] = [
     (("home", "city", "main"), PageState.HOME_CITY, "Matched home/city keyword."),
+    (("target", "goto", "dispatch"), PageState.ALLIANCE_TARGET_MENU, "Matched alliance-target menu keyword."),
     (("world", "map"), PageState.WORLD_MAP, "Matched world/map keyword."),
     (("alliance", "guild", "union"), PageState.ALLIANCE_TASK_CENTER, "Matched alliance-task keyword."),
     (("task", "quest"), PageState.TASK_CENTER, "Matched task keyword."),

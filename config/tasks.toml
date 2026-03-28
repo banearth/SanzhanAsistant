@@ -1,16 +1,20 @@
 [workflow]
 ordering = [
   "inspect_alliance_tasks",
+  "open_alliance_target_menu",
   "collect_mail",
   "collect_tasks",
   "collect_general_rewards",
   "recruit_safe_mode",
+  "garrison_alliance_target",
   "alliance_dispatch_loop",
 ]
 
 [tasks]
 inspect_alliance_tasks = true
 alliance_dispatch_loop = false
+open_alliance_target_menu = true
+garrison_alliance_target = false
 collect_mail = true
 collect_tasks = true
 collect_general_rewards = true
