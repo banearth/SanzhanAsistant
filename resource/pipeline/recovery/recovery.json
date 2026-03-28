@@ -1,0 +1,11 @@
+{
+  "RecoverFromPopup": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "next": [],
+    "attach": {
+      "stage": "recovery",
+      "note": "Placeholder recovery node for common popup handling."
+    }
+  }
+}

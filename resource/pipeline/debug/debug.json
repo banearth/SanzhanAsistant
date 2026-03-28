@@ -1,0 +1,11 @@
+{
+  "DebugCapture": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "next": [],
+    "attach": {
+      "stage": "debug",
+      "note": "Placeholder debug entry. Intended for screenshot and recognition debugging."
+    }
+  }
+}

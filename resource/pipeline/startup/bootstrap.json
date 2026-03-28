@@ -1,0 +1,11 @@
+{
+  "CheckEnv": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "next": [],
+    "attach": {
+      "stage": "bootstrap",
+      "note": "Placeholder startup node. Replace with real environment checks after controller integration."
+    }
+  }
+}

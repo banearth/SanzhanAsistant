@@ -1,0 +1,62 @@
+{
+  "interface_version": 2,
+  "name": "SanzhanAssistant",
+  "label": "Sanzhan Assistant",
+  "title": "Sanzhan Assistant",
+  "version": "0.1.0",
+  "description": "A MaaFramework-based assistant scaffold for SanZhan daily automation and low-risk battle support.",
+  "controller": [
+    {
+      "name": "AdbEmulator",
+      "label": "ADB Emulator",
+      "type": "Adb",
+      "display_short_side": 720,
+      "description": "Recommended primary controller for the first milestone."
+    },
+    {
+      "name": "Win32Emulator",
+      "label": "Win32 Emulator",
+      "type": "Win32",
+      "display_short_side": 720,
+      "description": "Reserved secondary controller option for later milestones."
+    }
+  ],
+  "resource": [
+    {
+      "name": "DefaultResource",
+      "label": "Default Resource",
+      "path": [
+        "resource"
+      ],
+      "description": "Contains draft image assets, OCR resources, and placeholder pipeline files."
+    }
+  ],
+  "agent": {
+    "child_exec": "python",
+    "child_args": [
+      "-m",
+      "src.app.main"
+    ]
+  },
+  "task": [
+    {
+      "name": "RunDaily",
+      "label": "Run Daily",
+      "entry": "RunDaily",
+      "default_check": true,
+      "description": "Run the low-risk daily flow scaffold."
+    },
+    {
+      "name": "CollectMailRewards",
+      "label": "Collect Mail Rewards",
+      "entry": "CollectMailRewards",
+      "description": "Collect mail rewards through the placeholder daily entry."
+    },
+    {
+      "name": "DebugCapture",
+      "label": "Debug Capture",
+      "entry": "DebugCapture",
+      "description": "Reserved debug entry for screenshot and recognizer calibration."
+    }
+  ]
+}

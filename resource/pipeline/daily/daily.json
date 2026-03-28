@@ -1,0 +1,20 @@
+{
+  "RunDaily": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "next": [],
+    "attach": {
+      "stage": "daily",
+      "note": "Placeholder entry for daily orchestration. Replace with actual page recognition and action nodes."
+    }
+  },
+  "CollectMailRewards": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "next": [],
+    "attach": {
+      "stage": "daily",
+      "note": "Placeholder entry for mail reward collection."
+    }
+  }
+}
