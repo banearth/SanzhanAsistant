@@ -46,9 +46,12 @@
 
 ```powershell
 python -m src.app.main check-env
+python -m src.app.main probe-device
 python -m src.app.main run-daily
 python -m src.app.main debug-capture
 python -m src.app.main inspect-fixtures
+python -m src.app.main capture-screen --name home_city --fixture
+python -m src.app.main capture-screen --name battle-report --fixture
 ```
 
 说明：

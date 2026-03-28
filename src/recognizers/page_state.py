@@ -11,6 +11,7 @@ KEYWORD_TO_STATE: list[tuple[tuple[str, ...], PageState, str]] = [
     (("task", "quest"), PageState.TASK_CENTER, "Matched task keyword."),
     (("mail", "email"), PageState.MAIL_CENTER, "Matched mail keyword."),
     (("recruit", "conscription", "soldier"), PageState.RECRUIT_PANEL, "Matched recruit keyword."),
+    (("battle", "report", "combat"), PageState.BATTLE_REPORT, "Matched battle-report keyword."),
     (("reward", "claim"), PageState.REWARD_POPUP, "Matched reward keyword."),
     (("confirm", "dialog"), PageState.CONFIRM_POPUP, "Matched confirm keyword."),
     (("network", "disconnect", "retry"), PageState.NETWORK_ERROR, "Matched network-error keyword."),

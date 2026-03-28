@@ -15,9 +15,17 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     subparsers.add_parser("check-env", help="Validate basic project layout and config files.")
+    subparsers.add_parser("probe-device", help="Inspect the configured ADB device and current foreground activity.")
     subparsers.add_parser("run-daily", help="Run the scaffold daily flow and write a report.")
     subparsers.add_parser("debug-capture", help="Create a placeholder debug report for capture work.")
     subparsers.add_parser("inspect-fixtures", help="Inspect screenshot fixture filenames and guess page states.")
+    capture_parser = subparsers.add_parser("capture-screen", help="Capture a screenshot from the configured ADB device.")
+    capture_parser.add_argument("--name", default="live-screen", help="Base filename for the screenshot output.")
+    capture_parser.add_argument(
+        "--fixture",
+        action="store_true",
+        help="Store the screenshot under tests/fixtures instead of reports/screenshots.",
+    )
     subparsers.add_parser("print-config", help="Print resolved config paths.")
     return parser
 
@@ -69,6 +77,15 @@ def run_daily(ctx: RuntimeContext) -> int:
     return 0
 
 
+def run_probe_device(ctx: RuntimeContext) -> int:
+    probe = DeviceAdapter(ctx).probe()
+    print(f"Serial: {probe.serial}")
+    print(f"Screen size: {probe.screen_size}")
+    print(f"Foreground activity: {probe.resumed_activity}")
+    print(f"Package name: {probe.package_name}")
+    return 0
+
+
 def run_debug_capture(ctx: RuntimeContext) -> int:
     summary = DailyRunner(ctx).debug_capture()
     report_path = ReportWriter(ctx).write_markdown(summary)
@@ -80,6 +97,18 @@ def run_inspect_fixtures(ctx: RuntimeContext) -> int:
     summary = DailyRunner(ctx).inspect_fixtures()
     report_path = ReportWriter(ctx).write_markdown(summary)
     print(f"Fixture inspection report written to: {report_path}")
+    return 0
+
+
+def run_capture_screen(ctx: RuntimeContext, name: str, fixture: bool) -> int:
+    safe_name = name.replace(" ", "-").replace("/", "-").replace("\\", "-")
+    if fixture:
+        output_dir = ctx.fixture_dir
+    else:
+        output_dir = ctx.screenshot_dir
+    output_path = output_dir / f"{safe_name}.png"
+    captured_path = DeviceAdapter(ctx).capture_screenshot(output_path)
+    print(f"Screenshot written to: {captured_path}")
     return 0
 
 
@@ -98,12 +127,16 @@ def main() -> int:
 
     if args.command == "check-env":
         return run_check_env(ctx)
+    if args.command == "probe-device":
+        return run_probe_device(ctx)
     if args.command == "run-daily":
         return run_daily(ctx)
     if args.command == "debug-capture":
         return run_debug_capture(ctx)
     if args.command == "inspect-fixtures":
         return run_inspect_fixtures(ctx)
+    if args.command == "capture-screen":
+        return run_capture_screen(ctx, args.name, args.fixture)
     if args.command == "print-config":
         return run_print_config(ctx)
 

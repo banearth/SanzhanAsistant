@@ -1,10 +1,11 @@
 [device]
 type = "adb"
-serial = "emulator-5554"
+adb_path = "C:/Program Files/Netease/MuMu/nx_device/12.0/shell/adb.exe"
+serial = "127.0.0.1:16384"
 
 [game]
-package_name = "your.game.package"
-channel = "official"
+package_name = "com.aligame.sgzzlb.nearme.gamecenter"
+channel = "nearme"
 language = "zh-CN"
 
 [runtime]
